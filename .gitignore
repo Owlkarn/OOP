@@ -1,0 +1,5 @@
+__pycache__/
+*.cpython-310
+venv/
+.idea/
+.iml
