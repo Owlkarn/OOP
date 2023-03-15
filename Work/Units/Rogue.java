@@ -1,9 +1,25 @@
 package Units;
 
-public class Rogue extends AgilityUsers {
+import Abstract.EvasionUsers;
 
-    public Rogue() {
-        super(40, 50, 30, 50);
+public class Rogue extends EvasionUsers {
+
+    protected float doubleDamageChance;
+
+    public Rogue(float hp, int speed, int damage, float evasion, float doubleDamageChance) {
+        super(hp, speed, damage, evasion);
+        this.doubleDamageChance = doubleDamageChance;
+    }
+
+    @Override
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    }
+
+    @Override
+    public String getInfo() {
+        return "Rogue";
     }
 
 }

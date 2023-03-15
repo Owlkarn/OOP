@@ -1,8 +1,25 @@
 package Units;
+
+import Abstract.ManaUsers;
+
 public class Monk extends ManaUsers{
 
-    public Monk() {
-        super(50, 30, 40, 40);
+    protected float prayChance;
+
+    public Monk(float hp, int speed, int damage, int mana, float prayChance) {
+        super(hp, speed, damage, mana);
+        this.prayChance = prayChance;
+    }
+
+    @Override
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    }
+
+    @Override
+    public String getInfo() {
+        return "Monk";
     }
        
 }
