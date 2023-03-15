@@ -16,8 +16,8 @@ public class Crossbowman extends ArrowsUsers {
         this.stunChance = stunChance;
     }
 
-    public Crossbowman() { 
-        Crossbowman(defaultHp, defaultSpeed, defaultDamage, defaultArrows, defaultStunChance);
+    public Crossbowman() {
+        this(defaultHp, defaultSpeed, defaultDamage, defaultArrows, defaultStunChance);
      }
 
 

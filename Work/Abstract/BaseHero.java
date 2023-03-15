@@ -13,9 +13,6 @@ public abstract class BaseHero implements HeroInterface {
 
     protected static Random rnd;
 
-    public BaseHero() {
-    }
-
     static {
         BaseHero.rnd = new Random();
     }
