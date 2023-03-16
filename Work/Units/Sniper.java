@@ -1,23 +1,30 @@
 package Units;
 
+import java.util.Random;
+
 import Abstract.ArrowsUsers;
 
 public class Sniper extends ArrowsUsers {
 
-    final static int defaultHp = 100;
-    final static int defaultSpeed = 50;
-    final static int defaultDamage = 80;
-    final static int defaultArrows = 60; 
+    final static int defaultHp = 15;
+    final static int defaultSpeed = 9;
+    final static float defaultDamage = new Random().nextFloat(8f, 10f);
+    final static int defaultArrows = 32; 
+    final static int defaultDefence = 10;
+    final static int defaultAttack = 12;
     final static float defaultDoubleDamageChance = 0.2f;
     private float doubleDamageChance;
 
-    public Sniper(float hp, int speed, int damage, int arrows, float doubleDamageChance) {
-        super(hp, speed, damage, arrows);
+    
+
+    public Sniper(float hp, int speed, float damage, int defence, String name, int attack, int arrows,
+            float doubleDamageChance) {
+        super(hp, speed, damage, defence, name, attack, arrows);
         this.doubleDamageChance = doubleDamageChance;
     }
 
-    public Sniper() {
-        this(defaultHp, defaultSpeed, defaultDamage, defaultArrows, defaultDoubleDamageChance);
+    public Sniper(String name) {
+        this(defaultHp, defaultSpeed, defaultDamage, defaultDefence, name, defaultAttack, defaultArrows, defaultDoubleDamageChance);
      }
 
     @Override

@@ -1,23 +1,30 @@
 package Units;
 
+import java.util.Random;
+
 import Abstract.EvasionUsers;
 
 public class Spearman extends EvasionUsers {
 
-    final static int defaultHp = 100;
-    final static int defaultSpeed = 50;
-    final static int defaultDamage = 80;
-    final static int defaultEvasion = 60; 
+    final static int defaultHp = 10;
+    final static int defaultSpeed = 4;
+    final static float defaultDamage = new Random().nextFloat(1f, 3f);;
+    final static float defaultEvasion = 0.2f; 
+    final static int defaultDefence = 5;
+    final static int defaultAttack = 4; 
     final static float defaultBlockChance = 0.2f;
     private float blockChance;
 
-    public Spearman(float hp, int speed, int damage, float evasion, float blockChance) {
-        super(hp, speed, damage, evasion);
+    
+
+    public Spearman(float hp, int speed, float damage, int defence, String name, int attack, float evasion,
+            float blockChance) {
+        super(hp, speed, damage, defence, name, attack, evasion);
         this.blockChance = blockChance;
     }
 
-    public Spearman() {
-        this(defaultHp, defaultSpeed, defaultDamage, defaultEvasion, defaultBlockChance);
+    public Spearman(String name) {
+        this(defaultHp, defaultSpeed, defaultDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultBlockChance);
      }
 
     @Override

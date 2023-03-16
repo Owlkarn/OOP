@@ -4,20 +4,25 @@ import Abstract.ManaUsers;
 
 public class Warlock extends ManaUsers {
 
-    final static int defaultHp = 100;
-    final static int defaultSpeed = 50;
-    final static int defaultDamage = 80;
-    final static int defaultMana = 60; 
+    final static int defaultHp = 30;
+    final static int defaultSpeed = 9;
+    final static float defaultDamage = -5;
+    final static int defaultMana = 1; 
+    final static int defaultDefence = 12;
+    final static int defaultAttack = 17;  
     final static float defaultDoubleCastChance = 0.2f;
     private float doubleCastChance;
 
-    public Warlock(float hp, int speed, int damage, int mana, float doubleCastChance) {
-        super(hp, speed, damage, mana);
+    
+
+    public Warlock(float hp, int speed, float damage, int defence, String name, int attack, int mana,
+            float doubleCastChance) {
+        super(hp, speed, damage, defence, name, attack, mana);
         this.doubleCastChance = doubleCastChance;
     }
 
-    public Warlock() {
-        this(defaultHp, defaultSpeed, defaultDamage, defaultMana, defaultDoubleCastChance);
+    public Warlock(String name) {
+        this(defaultHp, defaultSpeed, defaultDamage, defaultDefence, name, defaultAttack, defaultMana, defaultDoubleCastChance);
      }
 
     @Override
