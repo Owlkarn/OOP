@@ -26,14 +26,14 @@ public class Warlock extends ManaUsers {
      }
 
     @Override
-    public void Step() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    public String getInfo() {
+        return "Warlock";
     }
 
     @Override
-    public String getInfo() {
-        return "Warlock";
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
     }
     
 }

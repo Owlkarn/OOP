@@ -28,14 +28,14 @@ public class Sniper extends ArrowsUsers {
      }
 
     @Override
-    public void Step() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    public String getInfo() {
+        return "Sniper";
     }
 
     @Override
-    public String getInfo() {
-        return "Sniper";
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
     }
     
 }

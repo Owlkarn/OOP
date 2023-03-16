@@ -1,5 +1,7 @@
 package Abstract;
 
+import java.util.ArrayList;
+
 public abstract class ArrowsUsers extends BaseHero {
 
     protected int arrows;
@@ -9,7 +11,7 @@ public abstract class ArrowsUsers extends BaseHero {
         this.arrows = arrows;
     }
 
-     
+    
 
     
 }

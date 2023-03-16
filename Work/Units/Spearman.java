@@ -28,14 +28,14 @@ public class Spearman extends EvasionUsers {
      }
 
     @Override
-    public void Step() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    public String getInfo() {
+        return "Spearman";
     }
 
     @Override
-    public String getInfo() {
-        return "Spearman";
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
     }
     
 }

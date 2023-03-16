@@ -24,6 +24,7 @@ public class Main {
     private static String getName() {
         return Names.values()[new Random().nextInt(Names.values().length)].toString();
     }
+
     public static void main(String[] args) {
         ArrayList<BaseHero> team_1 = new ArrayList<>();
         ArrayList<BaseHero> team_2 = new ArrayList<>();
@@ -40,7 +41,9 @@ public class Main {
                     team_1.add(new Spearman(getName()));
                     break;
                 default:
-                    team_1.add(new Peasant(getName()));
+                    Peasant peasant = new Peasant(getName());
+                    peasant.setInfo("Peasant team 1");
+                    team_1.add(peasant);
                     break;
             }
             switch (new Random().nextInt(4)) {
@@ -54,7 +57,9 @@ public class Main {
                     team_2.add(new Rogue(getName()));
                     break;
                 default:
-                    team_2.add(new Peasant(getName()));
+                    Peasant peasant = new Peasant(getName());
+                    peasant.setInfo("Peasant team 2");
+                    team_2.add(peasant);
                     break;
             }
         }
@@ -77,17 +82,20 @@ public class Main {
 
         // System.out.println("Команда 1:");
         // for (BaseHero hero : team_1) {
-        //     System.out.println(hero.getInfo());
+        // System.out.println(hero.getInfo());
         // }
+        // System.out.println();
 
         // System.out.println("Команда 2:");
         // for (BaseHero hero : team_2) {
-        //     System.out.println(hero.getInfo());
+        // System.out.println(hero.getInfo());
         // }
+        // System.out.println();
 
-        System.out.println("Сортировка:");
-        for (BaseHero hero : stepTurnList) {
-            System.out.println(hero.getInfo() + " " + hero.getName());
-        }
+        // System.out.println("Сортировка:");
+        // for (BaseHero hero : stepTurnList) {
+        //     System.out.println(hero.getInfo() + " " + hero.getName());
+        // }
+        team_1.forEach(u -> u.Step(team_2, team_1));
     }
 }

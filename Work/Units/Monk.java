@@ -23,14 +23,14 @@ public class Monk extends ManaUsers{
      }
 
     @Override
-    public void Step() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    public String getInfo() {
+        return "Monk";
     }
 
     @Override
-    public String getInfo() {
-        return "Monk";
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
     }
        
 }

@@ -28,14 +28,14 @@ public class Rogue extends EvasionUsers {
      }
 
     @Override
-    public void Step() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Step'");
+    public String getInfo() {
+        return "Rogue";
     }
 
     @Override
-    public String getInfo() {
-        return "Rogue";
+    public void Step() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Step'");
     }
 
 }

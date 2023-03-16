@@ -1,5 +1,6 @@
 package Abstract;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import Interface.HeroInterface;
@@ -7,7 +8,7 @@ import Interface.HeroInterface;
 public abstract class BaseHero implements HeroInterface {
 
     protected int maxHp;
-    protected float hp;
+    public float hp;
     protected int speed;
     protected float damage;
     protected int defence;
@@ -29,20 +30,25 @@ public abstract class BaseHero implements HeroInterface {
         this.attack = attack;
     }
 
+    public void Step (ArrayList<BaseHero> team, ArrayList<BaseHero> team2) {
+    }
+
     public void healed(int Hp) {
         this.hp = Hp + this.hp > this.maxHp ? this.maxHp : Hp + this.hp;
     }
 
-    public void GetDamage(int damage) {
+    public void GetDamage(float damage) {
         if (this.hp - damage > 0) {
             this.hp -= damage;
         }
         // else { die(); }
     }
 
-    public void Attack(BaseHero target) {
-        int damage = BaseHero.rnd.nextInt(10, 20);
+    public void Attack(BaseHero target, float damage) {
         target.GetDamage(damage);
+        System.out.printf("%s %s attacks %s %s\n", this.getInfo(), this.getName(), target.getInfo(), target.getName());
+        System.out.printf("Damage deal %.2f\n", damage);
+        System.out.printf("%s %s hp = %.2f\n", target.getInfo(), target.getName(), target.hp);
     }
 
     public int getSpeed() {
