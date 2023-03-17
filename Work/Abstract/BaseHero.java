@@ -3,6 +3,7 @@ package Abstract;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Interface.Coordinates;
 import Interface.HeroInterface;
 
 public abstract class BaseHero implements HeroInterface {
@@ -10,10 +11,12 @@ public abstract class BaseHero implements HeroInterface {
     protected int maxHp;
     public float hp;
     protected int speed;
-    protected float damage;
+    protected int minDamage;
+    protected int maxDamage;
     protected int defence;
     protected String name;
     protected int attack;
+    public Coordinates position;
 
     protected static Random rnd;
 
@@ -21,13 +24,15 @@ public abstract class BaseHero implements HeroInterface {
         BaseHero.rnd = new Random();
     }
 
-    public BaseHero(float hp, int speed, float damage, int defence, String name, int attack) {
+    public BaseHero(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, Coordinates position) {
         this.hp = hp;
         this.speed = speed;
-        this.damage = damage;
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
         this.defence = defence;
         this.name = name;
         this.attack = attack;
+        this.position = position;
     }
 
     public void Step (ArrayList<BaseHero> team, ArrayList<BaseHero> team2) {

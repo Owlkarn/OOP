@@ -1,8 +1,12 @@
-// Добавить файл с описанием интерфейса. В котором описать два метода, void step(); и String getInfo(); 
-// Реализовать интерфейсs в абстрактном классе и в наследниках так, чтобы getInfo возвращал тип персонажа. 
-// Создать два списка в классе main. В кждый из списков добавить по десять экземнляров наследников BaseHero. 
-// Удалить ненужные методы из абстрактного класса, если такие есть. 
-// В main пройти по спискам и вызвать у всех персонажей getInfo.
+// Создать класс с описанием координат, x и y.
+// Добавить в абстрактный класс порле с координатами и пробросить его инициализацию до конструкторов персонажей. 
+// Farmer farmer = new Farmer(getName(), x, y);
+// Реализовать метод step() лучников. 
+// 3.1 Если жизнь равна нулю или стрел нет, завершить оьработку. 
+// 3.2 Поиск среди противников наиболее приближённого. 
+// 3.3 Нанести среднее повреждение найденному противнику. 
+// 3.4 Найти среди своих крестьянина. 
+// 3.5 Если найден завершить метод иначе уменьшить запас стрел на одну.
 
 import Units.Sniper;
 import Units.Spearman;
@@ -13,6 +17,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 import Abstract.BaseHero;
+import Interface.Coordinates;
 import Interface.Names;
 import Units.Crossbowman;
 import Units.Monk;
@@ -28,11 +33,15 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<BaseHero> team_1 = new ArrayList<>();
         ArrayList<BaseHero> team_2 = new ArrayList<>();
+        int xTeam1 = 1;
+        int yTeam1 = 1;
+        int xTeam2 = 10;
+        int yTeam2 = 1;
 
         for (int i = 0; i < 10; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team_1.add(new Crossbowman(getName()));
+                    team_1.add(new Crossbowman(getName(), Coordinates(xTeam1, yTeam1)));
                     break;
                 case 1:
                     team_1.add(new Monk(getName()));

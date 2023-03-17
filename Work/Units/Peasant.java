@@ -6,7 +6,8 @@ public class Peasant extends BaseHero {
 
     final static int defaultHp = 1;
     final static int defaultSpeed = 3;
-    final static float defaultDamage = 1; 
+    final static int defaultMinDamage = 1;
+    final static int defaultMaxDamage = 1; 
     final static int defaultDefence = 1;
     final static int defaultAttack = 1; 
     final static int defaultDelivery = 1;
@@ -14,14 +15,14 @@ public class Peasant extends BaseHero {
     private int delivery;
     private String info;  
 
-    public Peasant(float hp, int speed, float damage, int defence, String name, int attack, int delivery, String info) {
-        super(hp, speed, damage, defence, name, attack);
+    public Peasant(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int delivery, String info) {
+        super(hp, speed, minDamage, maxDamage, defence, name, attack);
         this.delivery = delivery;
         this.info = info;
     }
 
     public Peasant(String name) {
-        this(defaultHp, defaultSpeed, defaultDamage, defaultDefence, name, defaultAttack, defaultDelivery, defaultInfo);
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultDelivery, defaultInfo);
     }
 
     @Override

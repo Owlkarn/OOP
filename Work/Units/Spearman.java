@@ -8,7 +8,8 @@ public class Spearman extends EvasionUsers {
 
     final static int defaultHp = 10;
     final static int defaultSpeed = 4;
-    final static float defaultDamage = new Random().nextFloat(1f, 3f);;
+    final static int defaultMinDamage = 1;
+    final static int defaultMaxDamage = 3;
     final static float defaultEvasion = 0.2f; 
     final static int defaultDefence = 5;
     final static int defaultAttack = 4; 
@@ -17,14 +18,14 @@ public class Spearman extends EvasionUsers {
 
     
 
-    public Spearman(float hp, int speed, float damage, int defence, String name, int attack, float evasion,
+    public Spearman(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, float evasion,
             float blockChance) {
-        super(hp, speed, damage, defence, name, attack, evasion);
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, evasion);
         this.blockChance = blockChance;
     }
 
     public Spearman(String name) {
-        this(defaultHp, defaultSpeed, defaultDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultBlockChance);
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultBlockChance);
      }
 
     @Override

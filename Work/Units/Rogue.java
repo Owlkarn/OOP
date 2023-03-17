@@ -8,7 +8,8 @@ public class Rogue extends EvasionUsers {
 
     final static int defaultHp = 10;
     final static int defaultSpeed = 6;
-    final static float defaultDamage = new Random().nextFloat(2f, 4f);;
+    final static int defaultMinDamage = 2;
+    final static int defaultMaxDamage = 4; 
     final static float defaultEvasion = 0.2f; 
     final static int defaultDefence = 3;
     final static int defaultAttack = 8;
@@ -17,14 +18,14 @@ public class Rogue extends EvasionUsers {
 
     
 
-    public Rogue(float hp, int speed, float damage, int defence, String name, int attack, float evasion,
+    public Rogue(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, float evasion,
             float doubleDamageChance) {
-        super(hp, speed, damage, defence, name, attack, evasion);
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, evasion);
         this.doubleDamageChance = doubleDamageChance;
     }
 
     public Rogue(String name) {
-        this(defaultHp, defaultSpeed, defaultDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultDoubleDamageChance);
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultDoubleDamageChance);
      }
 
     @Override
