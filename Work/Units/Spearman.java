@@ -3,6 +3,7 @@ package Units;
 import java.util.Random;
 
 import Abstract.EvasionUsers;
+import Interface.Coordinates;
 
 public class Spearman extends EvasionUsers {
 
@@ -14,18 +15,20 @@ public class Spearman extends EvasionUsers {
     final static int defaultDefence = 5;
     final static int defaultAttack = 4; 
     final static float defaultBlockChance = 0.2f;
+    private Coordinates position;
     private float blockChance;
 
     
 
     public Spearman(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, float evasion,
-            float blockChance) {
-        super(hp, speed, minDamage, maxDamage, defence, name, attack, evasion);
+            float blockChance, Coordinates position) {
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, evasion, position);
         this.blockChance = blockChance;
     }
 
-    public Spearman(String name) {
-        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultBlockChance);
+    public Spearman(String name, Coordinates position) {
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
+        defaultEvasion, defaultBlockChance, position);
      }
 
     @Override

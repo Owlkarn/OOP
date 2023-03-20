@@ -3,6 +3,7 @@ package Units;
 import java.util.Random;
 
 import Abstract.EvasionUsers;
+import Interface.Coordinates;
 
 public class Rogue extends EvasionUsers {
 
@@ -14,18 +15,20 @@ public class Rogue extends EvasionUsers {
     final static int defaultDefence = 3;
     final static int defaultAttack = 8;
     final static float defaultDoubleDamageChance = 0.2f;
+    private Coordinates position;
     private float doubleDamageChance;
 
     
 
     public Rogue(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, float evasion,
-            float doubleDamageChance) {
-        super(hp, speed, minDamage, maxDamage, defence, name, attack, evasion);
+            float doubleDamageChance, Coordinates position) {
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, evasion, position);
         this.doubleDamageChance = doubleDamageChance;
     }
 
-    public Rogue(String name) {
-        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultEvasion, defaultDoubleDamageChance);
+    public Rogue(String name, Coordinates position) {
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
+        defaultEvasion, defaultDoubleDamageChance, position);
      }
 
     @Override

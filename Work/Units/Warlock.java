@@ -1,6 +1,7 @@
 package Units;
 
 import Abstract.ManaUsers;
+import Interface.Coordinates;
 
 public class Warlock extends ManaUsers {
 
@@ -12,18 +13,20 @@ public class Warlock extends ManaUsers {
     final static int defaultDefence = 12;
     final static int defaultAttack = 17;  
     final static float defaultDoubleCastChance = 0.2f;
+    private Coordinates position;
     private float doubleCastChance;
 
     
 
     public Warlock(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int mana,
-            float doubleCastChance) {
-        super(hp, speed, minDamage, maxDamage, defence, name, attack, mana);
+            float doubleCastChance, Coordinates position) {
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, mana, position);
         this.doubleCastChance = doubleCastChance;
     }
 
-    public Warlock(String name) {
-        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultMana, defaultDoubleCastChance);
+    public Warlock(String name, Coordinates position) {
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
+        defaultMana, defaultDoubleCastChance, position);
      }
 
     @Override

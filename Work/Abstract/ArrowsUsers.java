@@ -9,8 +9,8 @@ public abstract class ArrowsUsers extends BaseHero {
 
     protected int arrows;
 
-    public ArrowsUsers(float hp, int speed, int mindamage, int maxDamage, int defence, String name, int attack, 
-    int arrows, Coordinates position) {
+    public ArrowsUsers(float hp, int speed, int mindamage, int maxDamage, int defence, String name, int attack,
+            int arrows, Coordinates position) {
         super(hp, speed, mindamage, maxDamage, defence, name, attack, position);
         this.arrows = arrows;
     }
@@ -19,17 +19,12 @@ public abstract class ArrowsUsers extends BaseHero {
     public void Step(ArrayList<BaseHero> enemyTeam, ArrayList<BaseHero> alliesTeam) {
         if (arrows > 0 && hp > 0) {
             System.out.println("Могу стрелять!");
-            for (BaseHero unit : enemyTeam) {
-                if (unit.hp > 0) {
-                    float damage = rndDamage(minDamage, maxDamage);
-                    Attack(unit, damage);
-                    if (!alliesTeam.stream().filter(peasant -> peasant.getInfo().startsWith("P"))
+            Attack(findNearest(enemyTeam), rndDamage(minDamage, maxDamage));
+            if (!alliesTeam.stream().filter(peasant -> peasant.getInfo().startsWith("P"))
                     .anyMatch(peasant -> true)) {
-                        this.arrows--;
-                    }
-                    System.out.println("Arrows have: " + this.getArrows());
-                }                
+                this.arrows--;
             }
+            System.out.println("Arrows have: " + this.getArrows());
         }
     }
 
@@ -41,5 +36,4 @@ public abstract class ArrowsUsers extends BaseHero {
         return new Random().nextFloat(a, b);
     }
 
-    
 }

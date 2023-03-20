@@ -1,6 +1,7 @@
 package Units;
 
 import Abstract.BaseHero;
+import Interface.Coordinates;
 
 public class Peasant extends BaseHero {
 
@@ -12,17 +13,19 @@ public class Peasant extends BaseHero {
     final static int defaultAttack = 1; 
     final static int defaultDelivery = 1;
     final static String defaultInfo = "Peasant";
+    private Coordinates position;
     private int delivery;
     private String info;  
 
-    public Peasant(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int delivery, String info) {
-        super(hp, speed, minDamage, maxDamage, defence, name, attack);
+    public Peasant(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int delivery, String info, Coordinates position) {
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, position);
         this.delivery = delivery;
         this.info = info;
     }
 
-    public Peasant(String name) {
-        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, defaultDelivery, defaultInfo);
+    public Peasant(String name, Coordinates position) {
+        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
+        defaultDelivery, defaultInfo, position);
     }
 
     @Override

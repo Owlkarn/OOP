@@ -1,4 +1,7 @@
 package Interface;
+
+import Abstract.BaseHero;
+
 public class Coordinates {
     
     private int x;
@@ -17,11 +20,15 @@ public class Coordinates {
         this.x = x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public float getDistance(BaseHero unit) {
+        return (float) Math.sqrt(Math.pow(x - unit.position.x, 2) + Math.pow(y - unit.position.y, 2));
     }
 }

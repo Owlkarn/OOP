@@ -8,21 +8,14 @@
 // 3.4 Найти среди своих крестьянина. 
 // 3.5 Если найден завершить метод иначе уменьшить запас стрел на одну.
 
-import Units.Sniper;
-import Units.Spearman;
-import Units.Warlock;
+import Units.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
-import Abstract.BaseHero;
-import Interface.Coordinates;
-import Interface.Names;
-import Units.Crossbowman;
-import Units.Monk;
-import Units.Peasant;
-import Units.Rogue;
+import Abstract.*;
+import Interface.*;
 
 public class Main {
 
@@ -41,36 +34,38 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team_1.add(new Crossbowman(getName(), Coordinates(xTeam1, yTeam1)));
+                    team_1.add(new Crossbowman(getName(), new Coordinates(xTeam1, yTeam1)));
                     break;
                 case 1:
-                    team_1.add(new Monk(getName()));
+                    team_1.add(new Monk(getName(), new Coordinates(xTeam1, yTeam1)));
                     break;
                 case 2:
-                    team_1.add(new Spearman(getName()));
+                    team_1.add(new Spearman(getName(), new Coordinates(xTeam1, yTeam1)));
                     break;
                 default:
-                    Peasant peasant = new Peasant(getName());
+                    Peasant peasant = new Peasant(getName(), new Coordinates(xTeam1, yTeam1));
                     peasant.setInfo("Peasant team 1");
                     team_1.add(peasant);
                     break;
             }
+            yTeam1++;
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team_2.add(new Sniper(getName()));
+                    team_2.add(new Sniper(getName(), new Coordinates(xTeam2, yTeam2)));
                     break;
                 case 1:
-                    team_2.add(new Warlock(getName()));
+                    team_2.add(new Warlock(getName(), new Coordinates(xTeam2, yTeam2)));
                     break;
                 case 2:
-                    team_2.add(new Rogue(getName()));
+                    team_2.add(new Rogue(getName(), new Coordinates(xTeam2, yTeam2)));
                     break;
                 default:
-                    Peasant peasant = new Peasant(getName());
+                    Peasant peasant = new Peasant(getName(), new Coordinates(xTeam2, yTeam2));
                     peasant.setInfo("Peasant team 2");
                     team_2.add(peasant);
                     break;
             }
+            yTeam2++;
         }
 
         ArrayList<BaseHero> stepTurnList = new ArrayList<>();
@@ -91,13 +86,13 @@ public class Main {
 
         // System.out.println("Команда 1:");
         // for (BaseHero hero : team_1) {
-        // System.out.println(hero.getInfo());
+        // System.out.println(hero.getInfo() + " " + hero.position.getX() + "," + hero.position.getY());
         // }
         // System.out.println();
 
         // System.out.println("Команда 2:");
         // for (BaseHero hero : team_2) {
-        // System.out.println(hero.getInfo());
+        // System.out.println(hero.getInfo() + " " + hero.position.getX() + "," + hero.position.getY());
         // }
         // System.out.println();
 
