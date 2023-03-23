@@ -31,4 +31,9 @@ public class Coordinates {
     public float getDistance(BaseHero unit) {
         return (float) Math.sqrt(Math.pow(x - unit.position.x, 2) + Math.pow(y - unit.position.y, 2));
     }
+
+    public boolean isEquals(Coordinates opposit){
+        if (opposit.y == this.y && opposit.x == this.x) return true;
+        else return false;
+    }
 }

@@ -1,78 +1,76 @@
-// Создать класс с описанием координат, x и y.
-// Добавить в абстрактный класс порле с координатами и пробросить его инициализацию до конструкторов персонажей. 
-// Farmer farmer = new Farmer(getName(), x, y);
-// Реализовать метод step() лучников. 
-// 3.1 Если жизнь равна нулю или стрел нет, завершить оьработку. 
-// 3.2 Поиск среди противников наиболее приближённого. 
-// 3.3 Нанести среднее повреждение найденному противнику. 
-// 3.4 Найти среди своих крестьянина. 
-// 3.5 Если найден завершить метод иначе уменьшить запас стрел на одну.
+// Реализовать псевдо графику используя приложенные в документах занятия файлы. 
+// Распределить функционал основной программы по методам в соответствии с SOLID. 
+// Используя класс сканер реализовать повторение хода в основной программе.
 
 import Units.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.Scanner;
 
 import Abstract.*;
 import Interface.*;
 
 public class Main {
 
+    public static final int GANG_SIZE = 10;
+    public static ArrayList<BaseHero> whiteSide = new ArrayList<>();
+    public static ArrayList<BaseHero> darkSide = new ArrayList<>();
+    public static ArrayList<BaseHero> allUnits = new ArrayList<>();
+
     private static String getName() {
         return Names.values()[new Random().nextInt(Names.values().length)].toString();
     }
 
-    public static void main(String[] args) {
-        ArrayList<BaseHero> team_1 = new ArrayList<>();
-        ArrayList<BaseHero> team_2 = new ArrayList<>();
-        int xTeam1 = 1;
-        int yTeam1 = 1;
-        int xTeam2 = 10;
-        int yTeam2 = 1;
+    public static void init() {
+        int xWhiteSide = 1;
+        int yWhiteSide = 1;
+        int xDarkSide = 10;
+        int yDarkSide = 1;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < GANG_SIZE; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team_1.add(new Crossbowman(getName(), new Coordinates(xTeam1, yTeam1)));
+                    whiteSide.add(new Crossbowman(getName(), new Coordinates(xWhiteSide, yWhiteSide)));
                     break;
                 case 1:
-                    team_1.add(new Monk(getName(), new Coordinates(xTeam1, yTeam1)));
+                    whiteSide.add(new Monk(getName(), new Coordinates(xWhiteSide, yWhiteSide)));
                     break;
                 case 2:
-                    team_1.add(new Spearman(getName(), new Coordinates(xTeam1, yTeam1)));
+                    whiteSide.add(new Spearman(getName(), new Coordinates(xWhiteSide, yWhiteSide)));
                     break;
                 default:
-                    Peasant peasant = new Peasant(getName(), new Coordinates(xTeam1, yTeam1));
-                    peasant.setInfo("Peasant team 1");
-                    team_1.add(peasant);
+                    Peasant peasant = new Peasant(getName(), new Coordinates(xWhiteSide, yWhiteSide));
+                    Peasant.setType("Peasant team 1");
+                    whiteSide.add(peasant);
                     break;
             }
-            yTeam1++;
+            yWhiteSide++;
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team_2.add(new Sniper(getName(), new Coordinates(xTeam2, yTeam2)));
+                    darkSide.add(new Sniper(getName(), new Coordinates(xDarkSide, yDarkSide)));
                     break;
                 case 1:
-                    team_2.add(new Warlock(getName(), new Coordinates(xTeam2, yTeam2)));
+                    darkSide.add(new Warlock(getName(), new Coordinates(xDarkSide, yDarkSide)));
                     break;
                 case 2:
-                    team_2.add(new Rogue(getName(), new Coordinates(xTeam2, yTeam2)));
+                    darkSide.add(new Rogue(getName(), new Coordinates(xDarkSide, yDarkSide)));
                     break;
                 default:
-                    Peasant peasant = new Peasant(getName(), new Coordinates(xTeam2, yTeam2));
-                    peasant.setInfo("Peasant team 2");
-                    team_2.add(peasant);
+                    Peasant peasant = new Peasant(getName(), new Coordinates(xDarkSide, yDarkSide));
+                    Peasant.setType("Peasant team 2");
+                    darkSide.add(peasant);
                     break;
             }
-            yTeam2++;
+            yDarkSide++;
         }
+    }
 
-        ArrayList<BaseHero> stepTurnList = new ArrayList<>();
-
-        stepTurnList.addAll(team_1);
-        stepTurnList.addAll(team_2);
-        stepTurnList.sort(new Comparator<BaseHero>() {
+    public static void makeStep(){
+        allUnits.addAll(whiteSide);
+        allUnits.addAll(darkSide);
+        allUnits.sort(new Comparator<BaseHero>() {
             @Override
             public int compare(BaseHero u1, BaseHero u2) {
                 if (u1.getSpeed() > u2.getSpeed())
@@ -84,22 +82,17 @@ public class Main {
             }
         });
 
-        // System.out.println("Команда 1:");
-        // for (BaseHero hero : team_1) {
-        // System.out.println(hero.getInfo() + " " + hero.position.getX() + "," + hero.position.getY());
-        // }
-        // System.out.println();
+        whiteSide.forEach(u -> u.Step(darkSide, whiteSide));
+    }
+    
+    public static void main(String[] args) {
+        init();
 
-        // System.out.println("Команда 2:");
-        // for (BaseHero hero : team_2) {
-        // System.out.println(hero.getInfo() + " " + hero.position.getX() + "," + hero.position.getY());
-        // }
-        // System.out.println();
-
-        // System.out.println("Сортировка:");
-        // for (BaseHero hero : stepTurnList) {
-        //     System.out.println(hero.getInfo() + " " + hero.getName());
-        // }
-        team_1.forEach(u -> u.Step(team_2, team_1));
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            ConsoleView.view();
+            makeStep();
+            scanner.nextLine();
+        }
     }
 }

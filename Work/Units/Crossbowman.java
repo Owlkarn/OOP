@@ -9,7 +9,8 @@ import Interface.Coordinates;
 
 public class Crossbowman extends ArrowsUsers {
 
-    final static int defaultHp = 10;
+    final static int defaultMaxHp = 10;
+    static float hp = defaultMaxHp;
     final static int defaultSpeed = 4;
     final static int defaultMinDamage = 2;
     final static int defaultMaxDamage = 3;
@@ -19,21 +20,22 @@ public class Crossbowman extends ArrowsUsers {
     final static int defaultAttack = 6;
     private Coordinates position;
     private float stunChance;
+    final static String type = "Crossbowman";
 
     public Crossbowman(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int arrows,
-            float stunChance, Coordinates position) {
-        super(hp, speed, minDamage, maxDamage, defence, name, attack, arrows, position);
+            float stunChance, Coordinates position, String type, int maxHp) {
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, arrows, position, type, maxHp);
         this.stunChance = stunChance;
     }
 
     public Crossbowman(String name, Coordinates position) {
-        this(defaultHp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
-        defaultArrows, defaultStunChance, position);
+        this(hp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
+        defaultArrows, defaultStunChance, position, type, defaultMaxHp);
      }
 
     @Override
-    public String getInfo() {
-        return "Crossbowman";
+    public String getType() {
+        return type;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package Abstract;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import Interface.Coordinates;
@@ -20,6 +17,7 @@ public abstract class BaseHero implements HeroInterface {
     protected String name;
     protected int attack;
     public Coordinates position;
+    public String type;
 
     protected static Random rnd;
 
@@ -28,8 +26,9 @@ public abstract class BaseHero implements HeroInterface {
     }
 
     public BaseHero(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack,
-            Coordinates position) {
-        this.hp = hp;
+            Coordinates position, String type, int maxHp) {
+        this.hp = maxHp;
+        this.maxHp = maxHp;
         this.speed = speed;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
@@ -37,6 +36,7 @@ public abstract class BaseHero implements HeroInterface {
         this.name = name;
         this.attack = attack;
         this.position = position;
+        this.type = this.getClass().getName().split("\\.")[1];
     }
 
     public void Step(ArrayList<BaseHero> team, ArrayList<BaseHero> team2) {
@@ -50,16 +50,18 @@ public abstract class BaseHero implements HeroInterface {
         if (this.hp - damage > 0) {
             this.hp -= damage;
         }
-        // else { die(); }
+        else this.hp = 0;
     }
 
     public void Attack(BaseHero target, float damage) {
         target.GetDamage(damage);
-        System.out.printf("%s %s (%d, %d) attacks %s %s (%d, %d)\n",
-                this.getInfo(), this.getName(), this.position.getX(), this.position.getY(),
-                target.getInfo(), target.getName(), target.position.getX(), target.position.getY());
-        System.out.printf("Damage deal %.2f\n", damage);
-        System.out.printf("%s %s hp = %.2f\n", target.getInfo(), target.getName(), target.hp);
+        // System.out.printf("%s %s (%d, %d) attacks %s %s (%d, %d)\n",
+        // this.getInfo(), this.getName(), this.position.getX(), this.position.getY(),
+        // target.getInfo(), target.getName(), target.position.getX(),
+        // target.position.getY());
+        // System.out.printf("Damage deal %.2f\n", damage);
+        // System.out.printf("%s %s hp = %.2f\n", target.getInfo(), target.getName(),
+        // target.hp);
     }
 
     public int getSpeed() {
@@ -85,5 +87,20 @@ public abstract class BaseHero implements HeroInterface {
             }
         }
         return target;
+    }
+
+    public Coordinates getPosition() {
+        return this.position;
+    }
+
+    @Override
+    public String getInfo() {
+        String outStr = String.format("\t%-3s\t⚔️ %-3d\t\uD83D\uDEE1 %-3d\t♥️%-3d%%\t☠️%-3d\t ",
+                type, attack, defence, (int) hp * 100 / maxHp, (minDamage + maxDamage) / 2);
+        return outStr;
+    }
+
+    public String getType() {
+        return "";
     }
 }
