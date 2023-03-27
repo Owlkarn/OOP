@@ -65,9 +65,7 @@ public class Main {
             }
             yDarkSide++;
         }
-    }
 
-    public static void makeStep(){
         allUnits.addAll(whiteSide);
         allUnits.addAll(darkSide);
         allUnits.sort(new Comparator<BaseHero>() {
@@ -81,14 +79,28 @@ public class Main {
                     return 0;
             }
         });
-
-        whiteSide.forEach(u -> u.Step(darkSide, whiteSide));
     }
-    
+
+    public static void makeStep() {
+
+        for (BaseHero baseHero : allUnits) {
+            System.out.println(allUnits.indexOf(baseHero) + " " + baseHero.getInfo() + " " + baseHero.getSpeed());
+        }
+        // System.out.println(allUnits);
+
+        for (BaseHero unit : allUnits) {
+            if (darkSide.contains(unit))
+                unit.Step(whiteSide, darkSide);
+            else
+                unit.Step(darkSide, whiteSide);
+        }
+    }
+
     public static void main(String[] args) {
         init();
 
         Scanner scanner = new Scanner(System.in);
+
         while (true) {
             ConsoleView.view();
             makeStep();

@@ -53,15 +53,12 @@ public abstract class BaseHero implements HeroInterface {
         else this.hp = 0;
     }
 
+    public float rndDamage(int a, int b) {
+        return new Random().nextFloat(a, b);
+    }
+
     public void Attack(BaseHero target, float damage) {
         target.GetDamage(damage);
-        // System.out.printf("%s %s (%d, %d) attacks %s %s (%d, %d)\n",
-        // this.getInfo(), this.getName(), this.position.getX(), this.position.getY(),
-        // target.getInfo(), target.getName(), target.position.getX(),
-        // target.position.getY());
-        // System.out.printf("Damage deal %.2f\n", damage);
-        // System.out.printf("%s %s hp = %.2f\n", target.getInfo(), target.getName(),
-        // target.hp);
     }
 
     public int getSpeed() {
@@ -70,6 +67,10 @@ public abstract class BaseHero implements HeroInterface {
 
     public String getName() {
         return name;
+    }
+
+    public int getHp() {
+        return maxHp;
     }
 
     public float getDistance(BaseHero unit) {
@@ -81,7 +82,7 @@ public abstract class BaseHero implements HeroInterface {
         float targetDistance = this.getDistance(team.get(0));
         BaseHero target = team.get(0);
         for (BaseHero unit : team) {
-            if (this.getDistance(unit) < targetDistance) {
+            if (unit.hp > 0 && this.getDistance(unit) < targetDistance) {
                 target = unit;
                 targetDistance = this.getDistance(unit);
             }
@@ -95,7 +96,7 @@ public abstract class BaseHero implements HeroInterface {
 
     @Override
     public String getInfo() {
-        String outStr = String.format("\t%-3s\t⚔️ %-3d\t\uD83D\uDEE1 %-3d\t♥️%-3d%%\t☠️%-3d\t ",
+        String outStr = String.format("\t%-3s\tAtt %-3d\tDef %-3d\tHp %-3d%%\tDmg %-3d\t ",
                 type, attack, defence, (int) hp * 100 / maxHp, (minDamage + maxDamage) / 2);
         return outStr;
     }
