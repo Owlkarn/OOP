@@ -69,8 +69,8 @@ public abstract class BaseHero implements HeroInterface {
         return name;
     }
 
-    public int getHp() {
-        return maxHp;
+    public int getAttack() {
+        return attack;
     }
 
     public float getDistance(BaseHero unit) {

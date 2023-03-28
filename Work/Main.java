@@ -9,6 +9,8 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.lang.model.util.ElementScanner14;
+
 import Abstract.*;
 import Interface.*;
 
@@ -71,21 +73,26 @@ public class Main {
         allUnits.sort(new Comparator<BaseHero>() {
             @Override
             public int compare(BaseHero u1, BaseHero u2) {
-                if (u1.getSpeed() > u2.getSpeed())
+                if (u1.getSpeed() == u2.getSpeed()) {
+                    if (u1.getAttack() > u2.getAttack())
+                    return 1;
+                    else if (u1.getAttack() < u2.getAttack())
                     return -1;
+                    else return 0;
+                }
                 else if (u1.getSpeed() < u2.getSpeed())
                     return 1;
                 else
-                    return 0;
+                    return -1;
             }
         });
     }
 
     public static void makeStep() {
 
-        for (BaseHero baseHero : allUnits) {
-            System.out.println(allUnits.indexOf(baseHero) + " " + baseHero.getInfo() + " " + baseHero.getSpeed());
-        }
+        // for (BaseHero baseHero : allUnits) {
+        //     System.out.println(allUnits.indexOf(baseHero) + " " + baseHero.getInfo() + " " + baseHero.position.getX()+ " " + baseHero.position.getY());
+        // }
         // System.out.println(allUnits);
 
         for (BaseHero unit : allUnits) {

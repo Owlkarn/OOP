@@ -17,7 +17,7 @@ public abstract class ArrowsUsers extends BaseHero {
 
     @Override
     public void Step(ArrayList<BaseHero> enemyTeam, ArrayList<BaseHero> alliesTeam) {
-        if (arrows > 0 && hp > 0) {
+        if (hp > 0 && arrows > 0) {
             Attack(findNearest(enemyTeam), rndDamage(minDamage, maxDamage));
             if (!alliesTeam.stream().filter(peasant -> peasant.getInfo().startsWith("P"))
                     .anyMatch(peasant -> true)) {
