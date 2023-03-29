@@ -65,6 +65,10 @@ public abstract class BaseHero implements HeroInterface {
         return speed;
     }
 
+    public float getHp() {
+        return hp;
+    }
+
     public String getName() {
         return name;
     }
@@ -79,8 +83,9 @@ public abstract class BaseHero implements HeroInterface {
     }
 
     public BaseHero findNearest(ArrayList<BaseHero> team) {
-        float targetDistance = this.getDistance(team.get(0));
-        BaseHero target = team.get(0);
+        BaseHero target = findAlive(team);
+        float targetDistance = this.getDistance(target);
+        
         for (BaseHero unit : team) {
             if (unit.hp > 0 && this.getDistance(unit) < targetDistance) {
                 target = unit;
@@ -88,6 +93,14 @@ public abstract class BaseHero implements HeroInterface {
             }
         }
         return target;
+    }
+
+    private BaseHero findAlive(ArrayList<BaseHero> team) {
+        for (BaseHero unit : team) {
+            if (unit.hp > 0)
+            return unit;
+        }
+        return team.get(0);
     }
 
     public Coordinates getPosition() {

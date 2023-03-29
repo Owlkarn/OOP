@@ -1,7 +1,5 @@
 package Units;
 
-import java.util.Random;
-
 import Abstract.ArrowsUsers;
 import Interface.Coordinates;
 

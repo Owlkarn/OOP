@@ -75,12 +75,12 @@ public class Main {
             public int compare(BaseHero u1, BaseHero u2) {
                 if (u1.getSpeed() == u2.getSpeed()) {
                     if (u1.getAttack() > u2.getAttack())
-                    return 1;
+                        return 1;
                     else if (u1.getAttack() < u2.getAttack())
-                    return -1;
-                    else return 0;
-                }
-                else if (u1.getSpeed() < u2.getSpeed())
+                        return -1;
+                    else
+                        return 0;
+                } else if (u1.getSpeed() < u2.getSpeed())
                     return 1;
                 else
                     return -1;
@@ -91,7 +91,8 @@ public class Main {
     public static void makeStep() {
 
         // for (BaseHero baseHero : allUnits) {
-        //     System.out.println(allUnits.indexOf(baseHero) + " " + baseHero.getInfo() + " " + baseHero.position.getX()+ " " + baseHero.position.getY());
+        // System.out.println(allUnits.indexOf(baseHero) + " " + baseHero.getInfo() + "
+        // " + baseHero.position.getX()+ " " + baseHero.position.getY());
         // }
         // System.out.println(allUnits);
 
@@ -101,8 +102,29 @@ public class Main {
             else
                 unit.Step(darkSide, whiteSide);
         }
+        gameOver();
     }
 
+    public static boolean isAlive(ArrayList<BaseHero> team) {
+        for (BaseHero hero : team) {
+            if (hero.getHp() > 0)
+                return true;
+        }
+        return false;
+    }
+
+    public static void gameOver() {
+        if (!isAlive(whiteSide)) {
+            ConsoleView.view();
+            System.out.println("DarkSide Win");
+            System.exit(0);
+        }
+        if (!isAlive(darkSide)) {
+            ConsoleView.view();
+            System.out.println("WhiteSide Win");
+            System.exit(0);
+        }
+    }
     public static void main(String[] args) {
         init();
 
