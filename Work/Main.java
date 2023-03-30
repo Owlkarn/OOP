@@ -9,8 +9,6 @@ import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.lang.model.util.ElementScanner14;
-
 import Abstract.*;
 import Interface.*;
 
@@ -75,9 +73,9 @@ public class Main {
             public int compare(BaseHero u1, BaseHero u2) {
                 if (u1.getSpeed() == u2.getSpeed()) {
                     if (u1.getAttack() > u2.getAttack())
-                        return 1;
-                    else if (u1.getAttack() < u2.getAttack())
                         return -1;
+                    else if (u1.getAttack() < u2.getAttack())
+                        return 1;
                     else
                         return 0;
                 } else if (u1.getSpeed() < u2.getSpeed())
@@ -94,7 +92,7 @@ public class Main {
         // System.out.println(allUnits.indexOf(baseHero) + " " + baseHero.getInfo() + "
         // " + baseHero.position.getX()+ " " + baseHero.position.getY());
         // }
-        // System.out.println(allUnits);
+        //System.out.println(allUnits);
 
         for (BaseHero unit : allUnits) {
             if (darkSide.contains(unit))
@@ -129,10 +127,12 @@ public class Main {
         init();
 
         Scanner scanner = new Scanner(System.in);
+        ConsoleView.view();
+        scanner.nextLine();
 
         while (true) {
-            ConsoleView.view();
             makeStep();
+            ConsoleView.view();            
             scanner.nextLine();
         }
     }

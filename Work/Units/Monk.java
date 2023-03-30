@@ -8,9 +8,9 @@ public class Monk extends ManaUsers{
     final static int defaultMaxHp = 30;
     static float hp = defaultMaxHp;
     final static int defaultSpeed = 5;
-    final static int defaultMinDamage = -4;
-    final static int defaultMaxDamage = -4;
-    final static int defaultMana = 1; 
+    final static int defaultMinDamage = 0;
+    final static int defaultMaxDamage = 0;
+    final static int defaultHeal = -4; 
     final static int defaultDefence = 7;
     final static int defaultAttack = 12; 
     final static float defaultPrayChance = 0.2f;
@@ -18,15 +18,15 @@ public class Monk extends ManaUsers{
     private Coordinates position;
     private float prayChance;
 
-    public Monk(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int mana, 
+    public Monk(float hp, int speed, int minDamage, int maxDamage, int defence, String name, int attack, int heal, 
     float prayChance, Coordinates position, String type, int maxHp) {
-        super(hp, speed, minDamage, maxDamage, defence, name, attack, mana, position, type, maxHp);
+        super(hp, speed, minDamage, maxDamage, defence, name, attack, heal, position, type, maxHp);
         this.prayChance = prayChance;
     }
 
     public Monk(String name, Coordinates position) {
         this(hp, defaultSpeed, defaultMinDamage, defaultMaxDamage, defaultDefence, name, defaultAttack, 
-        defaultMana, defaultPrayChance, position, type, defaultMaxHp);
+        defaultHeal, defaultPrayChance, position, type, defaultMaxHp);
      }
 
     @Override

@@ -117,8 +117,9 @@ public abstract class EvasionUsers extends BaseHero {
                     }
                 }
             } else {
-                Attack(target, rndDamage(minDamage, maxDamage));
-                System.out.println("Attack: " + target.type);
+                float dmg = rndDamage(minDamage, maxDamage);
+                Attack(findNearest(enemyTeam), dmg);
+                System.out.println(this.type + " attacked " + findNearest(enemyTeam).type + " for " + dmg);
             }
 
             // System.out.println("My position: " + this.position.getX()+"

@@ -69,6 +69,10 @@ public abstract class BaseHero implements HeroInterface {
         return hp;
     }
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+
     public String getName() {
         return name;
     }
