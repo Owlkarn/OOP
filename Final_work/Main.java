@@ -12,18 +12,32 @@ import java.util.Random;
 
 public class Main {
 
-    public static String messageCount = "Укажите количество игрушек %s, которое будет разыграно: ";
-    public static String messageChance = "Укажите шанс выпадения игрушки %s: ";
-    public static String messageInfo = "id: %d; Имя: %s; Шанс выпадения: %d; Оставшееся количество: %d\n";
-    public static List<Toy> gifts = new ArrayList<>();
-    public static List<String> prizes = new ArrayList<>();
-    public static File file = new File("prizes.txt");
+    public static String MESSAGE_COUNT = "Укажите количество игрушек %s, которое будет разыграно: ";
+    public static String MESSAGE_CHANCE = "Укажите шанс выпадения игрушки %s: ";
+    public static String MESSAGE_INFO = "id: %d; Имя: %s; Шанс выпадения: %d; Оставшееся количество: %d\n";
+    public static String MESSAGE_GET_NAME = "Укажите имя игрушки: ";
+    public static String MESSAGE_CHANGE_CHANCE = "У какой игрушки вы хотите изменить шанс выпадения? Укажите %s: \n";
+    public static String MESSAGE_CHANGE_CHANCE_SUCCESS = "Шанс выпадения игрушки %s изменен!\n";
+    public static String MESSAGE_FIND_ID_ERROR = "Объект с id %d не найден, попробуйте снова.\n";
+    public static String MESSAGE_RAFFLE_PRIZE = "Разыграна игрушка %s\n";
+    public static String MESSAGE_EMPTY_GIFTS_LIST = "Все призы разыграны!";
+    public static String MESSAGE_IN_GIFTS_LIST = "Сейчас в розыгрыше участвуют следующие игрушки:";
+    public static String MESSAGE_EMPTY_PRIZES_LIST = "Сейчас нет призов на выдачу";
+    public static String MESSAGE_IN_PRIZES_LIST = "Сейчас готовы к выдаче следующие призы:";
+    public static String MESSAGE_PRIZE_GIVE_OUT = "Приз выдан!";
+    public static String MESSAGE_EXCEPTION_NUMBER = "Ошибка: введено не число, попробуйте еще раз";
+    public static String MESSAGE_NO_COMMAND_ERROR = "Данной команды нет в справочнике.";
+    public static String MESSAGE_END = "Все призы разыграны и выданы! Розыгрыш окончен!";
 
-    public static List<String> addToList(int count, List<String> gifts, String toyName) {
+    public static List<Toy> GIFTS = new ArrayList<>();
+    public static List<String> PRIZES = new ArrayList<>();
+    public static File FILE = new File("PRIZES.txt");
+
+    public static List<String> addToList(int count, List<String> GIFTS, String toyName) {
         for (int i = 0; i < count; i++) {
-            gifts.add(toyName);
+            GIFTS.add(toyName);
         }
-        return gifts;
+        return GIFTS;
     }
 
     public static int getNumber(String name, String message) {
@@ -39,14 +53,14 @@ public class Main {
                 number = Integer.parseInt(input);
                 validInput = true;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: введено не число, попробуйте еще раз");
+                System.out.println(MESSAGE_EXCEPTION_NUMBER);
             }
         }
         return number;
     }
 
     public static int getMaxId() {
-        int maxId = Collections.max(gifts, new Comparator<Toy>() {
+        int maxId = Collections.max(GIFTS, new Comparator<Toy>() {
             @Override
             public int compare(Toy toy1, Toy toy2) {
                 return Integer.compare(toy1.getId(), toy2.getId());
@@ -57,33 +71,32 @@ public class Main {
 
     public static void addNewToy() {
         Scanner iScanner = new Scanner(System.in);
-        System.out.println("Укажите имя игрушки: ");
+        System.out.println(MESSAGE_GET_NAME);
         String name = iScanner.nextLine();
-        int chance = getNumber(name, messageChance);
+        int chance = getNumber(name, MESSAGE_CHANCE);
         int id = getMaxId();
-        int count = getNumber(name, messageCount);
+        int count = getNumber(name, MESSAGE_COUNT);
 
-        gifts.add(new Toy(id, name, count, chance));
+        GIFTS.add(new Toy(id, name, count, chance));
     }
 
     public static void changeChance() {
         getToysList();
-        String messageChangeChance = "У какой игрушки вы хотите изменить шанс выпадения? Укажите %s: \n";
-        int id = getNumber("id", messageChangeChance);
+        int id = getNumber("id", MESSAGE_CHANGE_CHANCE);
         boolean currentId = false;
 
         do {
-            for (Toy gift : gifts) {
+            for (Toy gift : GIFTS) {
                 if (id == gift.getId()) {
                     currentId = true;
-                    gift.setChance(getNumber(gift.getName(), messageChance));
-                    System.out.printf("Шанс выпадения игрушки %s изменен!\n", gift.getName());
+                    gift.setChance(getNumber(gift.getName(), MESSAGE_CHANCE));
+                    System.out.printf(MESSAGE_CHANGE_CHANCE_SUCCESS, gift.getName());
                     break;
                 }
             }
             if (!currentId) {
-                System.out.println("Объект с id " + id + " не найден, попробуйте снова.");
-                id = getNumber("id", messageChangeChance);
+                System.out.printf(MESSAGE_FIND_ID_ERROR, id);
+                id = getNumber("id", MESSAGE_CHANGE_CHANCE);
             }
         } while (!currentId);
 
@@ -91,7 +104,7 @@ public class Main {
 
     public static int getTotalChance() {
         int totalChance = 0;
-        for (Toy toy : gifts) {
+        for (Toy toy : GIFTS) {
             totalChance += toy.getChance();
         }
         return totalChance;
@@ -102,16 +115,16 @@ public class Main {
         int randomNumber = rnd.nextInt(getTotalChance()) + 1;
         int currentChance = 0;
         Toy prize;
-        for (Toy toy : gifts) {
+        for (Toy toy : GIFTS) {
             currentChance += toy.getChance();
             if (randomNumber <= currentChance) {
                 prize = toy;
-                prizes.add(prize.getName());
+                PRIZES.add(prize.getName());
                 toy.setCount(toy.getCount() - 1);
-                System.out.printf("Разыграна игрушка %s\n", prize.getName());
+                System.out.printf(MESSAGE_RAFFLE_PRIZE, prize.getName());
 
                 if (toy.getCount() == 0)
-                    gifts.remove(toy);
+                    GIFTS.remove(toy);
 
                 break;
             }
@@ -119,22 +132,22 @@ public class Main {
     }
 
     public static void getToysList() {
-        if (gifts.isEmpty())
-            System.out.println("Все призы разыграны!");
+        if (GIFTS.isEmpty())
+            System.out.println(MESSAGE_EMPTY_GIFTS_LIST);
         else {
-            System.out.println("Сейчас в розыгрыше участвуют следующие игрушки:");
-            for (Toy toy : gifts) {
-                System.out.printf(messageInfo, toy.id, toy.name, toy.chance, toy.count);
+            System.out.println(MESSAGE_IN_GIFTS_LIST);
+            for (Toy toy : GIFTS) {
+                System.out.printf(MESSAGE_INFO, toy.getId(), toy.getName(), toy.getChance(), toy.getCount());
             }
         }
     }
 
     public static void getPrizeList() {
-        if (prizes.isEmpty())
-            System.out.println("Сейчас нет призов на выдачу");
+        if (PRIZES.isEmpty())
+            System.out.println(MESSAGE_EMPTY_PRIZES_LIST);
         else {
-            System.out.println("Сейчас готовы к выдаче следующие призы:");
-            for (String prize : prizes) {
+            System.out.println(MESSAGE_IN_PRIZES_LIST);
+            for (String prize : PRIZES) {
                 System.out.println(prize);
             }
         }
@@ -143,13 +156,13 @@ public class Main {
     public static void giveOutPrize() {
 
         try {
-            FileWriter fw = new FileWriter(file, true);
-            fw.write("Выдан приз " + prizes.get(0) + "\n");
+            FileWriter fw = new FileWriter(FILE, true);
+            fw.write("Выдан приз " + PRIZES.get(0) + "\n");
             fw.flush();
-            System.out.println("Приз выдан!");
-            prizes.remove(0);
+            System.out.println(MESSAGE_PRIZE_GIVE_OUT);
+            PRIZES.remove(0);
         } catch (IOException e) {
-            System.out.println("Ошибка записи в файл " + file + ": " + e.getMessage());
+            System.out.println("Ошибка записи в файл " + FILE + ": " + e.getMessage());
         }
     }
 
@@ -170,15 +183,15 @@ public class Main {
                 break;
 
             case 2:
-                if (gifts.isEmpty())
-                    System.out.println("Все призы разыграны!");
+                if (GIFTS.isEmpty())
+                    System.out.println(MESSAGE_EMPTY_GIFTS_LIST);
                 else
                     rafflePrize();
                 break;
 
             case 3:
-                if (prizes.isEmpty())
-                    System.out.println("Все призы выданы!");
+                if (PRIZES.isEmpty())
+                    System.out.println(MESSAGE_EMPTY_PRIZES_LIST);
                 else
                     giveOutPrize();
                 break;
@@ -196,16 +209,16 @@ public class Main {
                 break;
 
             default:
-                System.out.println("Данной команды нет в справочнике.");
+                System.out.println(MESSAGE_NO_COMMAND_ERROR);
         }
     }
 
     public static void init() {
 
-        gifts.add(new Toy(1, "Bear", getNumber("Bear", messageCount), 6));
-        gifts.add(new Toy(2, "Car", getNumber("Car", messageCount), 4));
-        gifts.add(new Toy(3, "Doll", getNumber("Doll", messageCount), 3));
-        gifts.add(new Toy(4, "Robot", getNumber("Robot", messageCount), 2));
+        GIFTS.add(new Toy(1, "Bear", getNumber("Bear", MESSAGE_COUNT), 6));
+        GIFTS.add(new Toy(2, "Car", getNumber("Car", MESSAGE_COUNT), 4));
+        GIFTS.add(new Toy(3, "Doll", getNumber("Doll", MESSAGE_COUNT), 3));
+        GIFTS.add(new Toy(4, "Robot", getNumber("Robot", MESSAGE_COUNT), 2));
 
     }
 
@@ -213,17 +226,17 @@ public class Main {
         init();
         boolean raffle = true;
 
-        if (file.exists()) {
-            file.delete();
+        if (FILE.exists()) {
+            FILE.delete();
         }
 
         while (raffle) {
             menuSelect();
 
-            if (prizes.isEmpty() && gifts.isEmpty())
+            if (PRIZES.isEmpty() && GIFTS.isEmpty())
                 raffle = false;
         }
 
-        System.out.println("Все призы разыграны и выданы! Розыгрыш окончен!");
+        System.out.println(MESSAGE_END);
     }
 }

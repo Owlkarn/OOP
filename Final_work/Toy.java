@@ -1,10 +1,10 @@
 package Final_work;
 
 public class Toy {
-    protected int id;
-    protected String name;
-    protected int count;
-    protected int chance;
+    private int id;
+    private String name;
+    private int count;
+    private int chance;
 
     public Toy(int id, String name, int count, int chance) {
         this.id = id;
